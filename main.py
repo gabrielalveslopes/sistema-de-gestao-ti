@@ -1,5 +1,3 @@
-print("Sistema de Gestão TI iniciado.")
-
 from sqlalchemy import text
 
 from config.database import engine
