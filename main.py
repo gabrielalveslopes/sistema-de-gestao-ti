@@ -1,19 +1,11 @@
-from sqlalchemy import text
+from config.database import SessionLocal
+from models.departamento import Departamento
 
-from config.database import engine
+session = SessionLocal()
 
+departamentos = session.query(Departamento).all()
 
-try:
-    with engine.connect() as connection:
-        resultado = connection.execute(
-            text("SELECT current_database();")
-        )
+for departamento in departamentos:
+    print(departamento.id, departamento.nome)
 
-        banco = resultado.scalar()
-
-        print("Conexão realizada com sucesso!")
-        print(f"Banco conectado: {banco}")
-
-except Exception as erro:
-    print("Erro ao conectar ao banco:")
-    print(erro)
+session.close()
