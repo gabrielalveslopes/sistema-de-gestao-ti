@@ -1,18 +1,8 @@
-from config.database import SessionLocal
-from services.departamento_service import DepartamentoService
+from config.database import engine
+from models.base import Base
+import models
 
 
-session = SessionLocal()
+Base.metadata.create_all(bind=engine)
 
-try:
-    departamentos = DepartamentoService.listar(session)
-
-    print("Departamentos cadastrados:")
-
-    for departamento in departamentos:
-        print(
-            f"{departamento.id} - {departamento.nome}"
-        )
-
-finally:
-    session.close()
+print("Estrutura do banco verificada com sucesso.")
