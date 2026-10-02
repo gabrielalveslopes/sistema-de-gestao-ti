@@ -1,11 +1,18 @@
 from config.database import SessionLocal
-from models.departamento import Departamento
+from services.departamento_service import DepartamentoService
+
 
 session = SessionLocal()
 
-departamentos = session.query(Departamento).all()
+try:
+    departamentos = DepartamentoService.listar(session)
 
-for departamento in departamentos:
-    print(departamento.id, departamento.nome)
+    print("Departamentos cadastrados:")
 
-session.close()
+    for departamento in departamentos:
+        print(
+            f"{departamento.id} - {departamento.nome}"
+        )
+
+finally:
+    session.close()
