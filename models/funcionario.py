@@ -1,7 +1,12 @@
+from typing import TYPE_CHECKING
+
 from sqlalchemy import ForeignKey, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from models.base import Base
+
+if TYPE_CHECKING:
+    from models.departamento import Departamento
 
 
 class Funcionario(Base):
@@ -30,4 +35,8 @@ class Funcionario(Base):
     ativo: Mapped[bool] = mapped_column(
         default=True,
         nullable=False
+    )
+
+    departamento: Mapped["Departamento"] = relationship(
+        back_populates="funcionarios"
     )
