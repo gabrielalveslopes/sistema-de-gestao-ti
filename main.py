@@ -1,22 +1,38 @@
 from config.database import SessionLocal
-from models.funcionario import Funcionario
+from services.equipamento_service import EquipamentoService
 
 
 session = SessionLocal()
 
 try:
-    funcionarios = session.query(Funcionario).all()
+    equipamento = EquipamentoService.criar(
+        session=session,
+        numero_serie="SN-002",
+        nome_maquina="NOTE-TI-002",
+        fabricante="Lenovo",
+        modelo="ThinkPad E14",
+        tipo_aquisicao="ALUGADO",
+        fornecedor="Simpress"
+    )
 
-    print("FUNCIONÁRIOS CADASTRADOS")
-    print("------------------------")
+    print("Equipamento cadastrado com sucesso!")
+    print(f"ID: {equipamento.id}")
+    print(f"Número de série: {equipamento.numero_serie}")
+    print(f"Nome da máquina: {equipamento.nome_maquina}")
+    print(f"Fabricante: {equipamento.fabricante}")
+    print(f"Modelo: {equipamento.modelo}")
+    print(f"Tipo: {equipamento.tipo_aquisicao}")
 
-    for funcionario in funcionarios:
-        print(f"ID: {funcionario.id}")
-        print(f"Nome: {funcionario.nome}")
-        print(f"E-mail: {funcionario.email_institucional}")
-        print(f"Departamento: {funcionario.departamento.nome}")
-        print(f"Ativo: {funcionario.ativo}")
-        print("------------------------")
+    if equipamento.tipo_aquisicao == "ALUGADO":
+        print(f"Fornecedor: {equipamento.fornecedor}")
+    else:
+        print("Origem: Equipamento próprio")
+
+    print(f"Status: {equipamento.status}")
+    print(f"Ativo: {equipamento.ativo}")
+
+except ValueError as erro:
+    print(f"Erro: {erro}")
 
 finally:
     session.close()
