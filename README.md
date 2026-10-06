@@ -173,21 +173,22 @@ python main.py
 
 Até o momento:
 
-- [x] Configuração inicial do projeto
-- [x] Conexão do Python com PostgreSQL
-- [x] Modelagem inicial do banco de dados
-- [x] Cadastro de equipamentos
-- [x] Validação para impedir equipamentos duplicados
-- [ ] Cadastro completo de funcionários
-- [ ] Registro de movimentações
-- [ ] Controle de entrega e retirada
-- [ ] Histórico de equipamentos
-- [ ] Integração com Autentique
-- [ ] Geração automática de termos
-- [ ] Verificação automática de assinatura
-- [ ] Notificação de termos pendentes
-- [ ] Interface do sistema
-- [ ] Geração do executável
+✅ **Configuração inicial do projeto**  
+✅ **Conexão do Python com PostgreSQL**  
+✅ **Modelagem inicial do banco de dados**  
+✅ **Cadastro de equipamentos**  
+✅ **Validação para impedir equipamentos duplicados**
+
+⬜ Cadastro completo de funcionários  
+⬜ Registro de movimentações  
+⬜ Controle de entrega e retirada  
+⬜ Histórico de equipamentos  
+⬜ Integração com Autentique  
+⬜ Geração automática de termos  
+⬜ Verificação automática de assinatura  
+⬜ Notificação de termos pendentes  
+⬜ Interface do sistema  
+⬜ Geração do executável
 
 ---
 
