@@ -31,6 +31,16 @@ class MovimentacaoRepository:
         return session.scalar(comando)
 
     @staticmethod
+    def buscar_equipamento(
+        session: Session,
+        equipamento_id: int
+    ) -> Equipamento | None:
+
+        return session.get(Equipamento, equipamento_id)
+
+    
+
+    @staticmethod
     def buscar_movimentacao_aberta(
         session: Session,
         equipamento_id: int
@@ -58,3 +68,45 @@ class MovimentacaoRepository:
         session.add(movimentacao)
 
         return movimentacao
+
+    @staticmethod
+    def listar_historico(
+        session: Session,
+        equipamento_id: int
+    ) -> list[Movimentacao]:
+
+        comando = (
+            select(Movimentacao)
+            .where(Movimentacao.equipamento_id == equipamento_id)
+            .order_by(Movimentacao.data_hora_entrega.desc())
+        )
+
+        return list(session.scalars(comando).all())
+
+
+    @staticmethod
+    def listar_historico(
+        session: Session,
+        equipamento_id: int
+    ) -> list[Movimentacao]:
+
+        comando = (
+            select(Movimentacao)
+            .where(Movimentacao.equipamento_id == equipamento_id)
+            .order_by(Movimentacao.data_hora_entrega.desc())
+        )
+
+        return list(session.scalars(comando).all())
+
+    @staticmethod
+    def listar_equipamentos_em_uso(
+        session: Session
+    ) -> list[Movimentacao]:
+
+        comando = (
+            select(Movimentacao)
+            .where(Movimentacao.data_hora_devolucao.is_(None))
+            .order_by(Movimentacao.data_hora_entrega.desc())
+        )
+
+        return list(session.scalars(comando).all())
