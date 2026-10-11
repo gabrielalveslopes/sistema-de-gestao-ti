@@ -10,6 +10,8 @@ from PySide6.QtWidgets import (
     QStackedWidget,
 )
 
+from ui.pages.dashboard_page import DashboardPage
+
 
 class MainWindow(QMainWindow):
 
@@ -17,9 +19,26 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("AssetFlow - Gestão de TI")
-        self.resize(1100, 700)
+        self.resize(1200, 720)
 
         self.criar_interface()
+
+    def criar_pagina_temporaria(self, nome):
+        pagina = QWidget()
+        layout = QVBoxLayout(pagina)
+
+        titulo = QLabel(nome)
+        titulo.setObjectName("cabecalho")
+
+        descricao = QLabel(
+            f"A página de {nome.lower()} será implementada em breve."
+        )
+
+        layout.addWidget(titulo)
+        layout.addWidget(descricao)
+        layout.addStretch()
+
+        return pagina
 
     def criar_interface(self):
         central = QWidget()
@@ -44,14 +63,14 @@ class MainWindow(QMainWindow):
         self.paginas = QStackedWidget()
 
         secoes = [
-            "Dashboard",
-            "Equipamentos",
-            "Funcionários",
-            "Movimentações",
-            "Histórico",
+            ("Dashboard", DashboardPage()),
+            ("Equipamentos", self.criar_pagina_temporaria("Equipamentos")),
+            ("Funcionários", self.criar_pagina_temporaria("Funcionários")),
+            ("Movimentações", self.criar_pagina_temporaria("Movimentações")),
+            ("Histórico", self.criar_pagina_temporaria("Histórico")),
         ]
 
-        for indice, nome in enumerate(secoes):
+        for indice, (nome, pagina) in enumerate(secoes):
             botao = QPushButton(nome)
             botao.setCursor(Qt.CursorShape.PointingHandCursor)
 
@@ -60,21 +79,6 @@ class MainWindow(QMainWindow):
             )
 
             layout_menu.addWidget(botao)
-
-            pagina = QWidget()
-            layout_pagina = QVBoxLayout(pagina)
-
-            cabecalho = QLabel(nome)
-            cabecalho.setObjectName("cabecalho")
-
-            descricao = QLabel(
-                f"Área de {nome.lower()} do AssetFlow."
-            )
-
-            layout_pagina.addWidget(cabecalho)
-            layout_pagina.addWidget(descricao)
-            layout_pagina.addStretch()
-
             self.paginas.addWidget(pagina)
 
         layout_menu.addStretch()
