@@ -1,4 +1,5 @@
 from ui.pages.equipamentos_page import EquipamentosPage
+from ui.pages.funcionarios_page import FuncionariosPage
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
@@ -66,7 +67,7 @@ class MainWindow(QMainWindow):
         secoes = [
             ("Dashboard", DashboardPage()),
             ("Equipamentos", EquipamentosPage()),
-            ("Funcionários", self.criar_pagina_temporaria("Funcionários")),
+            ("Funcionários", FuncionariosPage()),
             ("Movimentações", self.criar_pagina_temporaria("Movimentações")),
             ("Histórico", self.criar_pagina_temporaria("Histórico")),
         ]
