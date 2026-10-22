@@ -1,5 +1,7 @@
 from ui.pages.equipamentos_page import EquipamentosPage
 from ui.pages.funcionarios_page import FuncionariosPage
+from ui.pages.movimentacoes_page import MovimentacoesPage
+from ui.pages.historico_page import HistoricoPage
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
@@ -68,8 +70,8 @@ class MainWindow(QMainWindow):
             ("Dashboard", DashboardPage()),
             ("Equipamentos", EquipamentosPage()),
             ("Funcionários", FuncionariosPage()),
-            ("Movimentações", self.criar_pagina_temporaria("Movimentações")),
-            ("Histórico", self.criar_pagina_temporaria("Histórico")),
+            ("Movimentações", MovimentacoesPage()),
+            ("Histórico", HistoricoPage()),
         ]
 
         for indice, (nome, pagina) in enumerate(secoes):
